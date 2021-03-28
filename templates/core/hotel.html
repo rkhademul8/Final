@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h2>This is the display test page </h2>
+
+<div class="abc">
+
+    <form action="/hotel/" method="POST">
+    {% csrf_token %}
+        <label>Hotel Name:</label>
+        <input type="text" name="hotel_name" placeholder="Hotel name...">
+
+        <label>Location:</label>
+        <select class="form-control" name="location" id="exampleFormControlSelect1">
+      <option>Dhaka</option>
+      <option>Rajshahi</option>
+      <option>Commila</option>
+        </select>
+
+        <label>Your Email:</label>
+        <input type="email" name="email" placeholder="example@gmail.com">
+        <label>Phone:</label>
+        <input type="text" name="number" placeholder="01xxxxxx">
+         <label>Example file input</label>
+        <input type="file" name="image">
+
+        <input type="submit" value="submit">
+    </form>
+
+</div>
+
+</body>
+</html>

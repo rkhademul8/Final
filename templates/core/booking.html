@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/boot/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+
+   <form action="/booking/" method="POST">
+    {% csrf_token %}
+  <div class="form-group">
+    <label>Booking Date</label>
+    <input type="date" class="form-control" name="book_date" placeholder="amount">
+  </div>
+
+
+   <div class="form-group">
+    <label>Check In</label>
+    <input type="date" class="form-control" name="check_in_date" placeholder="amount">
+  </div>
+
+   <div class="form-group">
+    <label>Check Out</label>
+    <input type="date" class="form-control" name="check_out_date" placeholder="amount">
+  </div>
+
+   <div class="form-group">
+    <label>Amount</label>
+    <input type="text" class="form-control" name="amount" placeholder="amount">
+  </div>
+
+   <!--
+   **Radio button**
+    <div class="form-group">
+        <label>Gender</label><br>
+  <input type="radio" id="male" name="gender" value="male">
+  <label for="male">Male</label><br>
+  <input type="radio" id="female" name="gender" value="female">
+  <label for="female">Female</label><br>
+  <input type="radio" id="other" name="gender" value="other">
+  <label for="other">Other</label>
+    </div>
+
+   -->
+
+         <div class="form-group">
+        <label>Payments Gateway</label><br>
+  <input type="radio" id="cash_one delivery" name="payments" value="Cash on">
+  <label for="cash">Cash On Delivery</label><br>
+  <input type="radio" id="bikash" name="payments" value="Bkash">
+  <label for="bkash">Bkashh</label><br>
+
+    </div>
+
+      <div class="form-group">
+    <label>Update</label>
+    <input type="text" class="form-control" name="update" placeholder="amount">
+  </div>
+
+      <input type="submit" value="submit">
+
+</form>
+
+</div>
+
+</body>
+</html>

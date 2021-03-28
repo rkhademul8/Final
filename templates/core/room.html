@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/boot/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+
+   <form action="/room/" method="POST">
+    {% csrf_token %}
+
+       <div class="form-group">
+        <label>Room Type</label><br>
+  <input type="radio" id="single" name="type" value="single">
+  <label for="single">Single</label><br>
+  <input type="radio" id="dpuble" name="type" value="double">
+  <label for="dpuble">Double</label><br>
+   </div>
+
+
+  <div class="form-group">
+    <label>Service</label>
+    <input type="text" class="form-control" name="service" placeholder="service...">
+  </div>
+
+
+   <div class="form-group">
+    <label>Image</label>
+    <input type="file" class="form-control" name="image" placeholder="images">
+  </div>
+
+   <div class="form-group">
+    <label>Description</label>
+    <input type="text" class="form-control" name="description" placeholder="Description....">
+  </div>
+
+   <div class="form-group">
+    <label>Price</label>
+    <input type="text" class="form-control" name="price" placeholder="Price">
+  </div>
+
+   <!--
+   **Radio button**
+    <div class="form-group">
+        <label>Gender</label><br>
+  <input type="radio" id="male" name="gender" value="male">
+  <label for="male">Male</label><br>
+  <input type="radio" id="female" name="gender" value="female">
+  <label for="female">Female</label><br>
+  <input type="radio" id="other" name="gender" value="other">
+  <label for="other">Other</label>
+    </div>
+
+   -->
+
+
+
+
+
+
+
+      <input type="submit" value="submit">
+
+</form>
+
+</div>
+
+</body>
+</html>

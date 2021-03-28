@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/boot/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+
+   <form action="/staff/" method="POST">
+    {% csrf_token %}
+
+
+       <div class="form-group">
+           <label>First Name</label>
+           <input type="text" class="form-control" name="f_name" placeholder="First name..">
+       </div>
+
+
+       <div class="form-group">
+           <label>Last Name</label>
+           <input type="text" class="form-control" name="l_name" placeholder="Last name..">
+       </div>
+
+
+       <div class="form-group">
+           <label>Contact Number:</label>
+           <input type="text" class="form-control" name="contact" placeholder="01xxxx">
+       </div>
+
+
+       <div class="form-group">
+           <label>Address</label>
+           <input type="text" class="form-control" name="address" placeholder="Address....">
+       </div>
+
+
+       <div class="form-group">
+           <label>Your Gender</label><br>
+           <input type="radio" id="male" name="gender" value="male">
+           <label for="cash">Male</label><br>
+
+           <input type="radio" id="fmale" name="gender" value="fmale">
+           <label for="bkash">Female</label><br>
+
+           <input type="radio" id="others" name="gender" value="others">
+           <label for="bkash">Other</label><br>
+
+       </div>
+
+       <div class="form-group">
+           <label>Image</label>
+           <input type="file" class="form-control" name="image" placeholder="images">
+       </div>
+
+       <div class="form-group">
+           <label>Join Date</label>
+           <input type="date" class="form-control" name="date" placeholder="Date">
+       </div>
+
+
+       <div class="form-group">
+           <label>Email</label>
+           <input type="email" class="form-control" name="email" placeholder="exapmle@gmail.com">
+       </div>
+
+       <div class="form-group">
+           <label>Password</label>
+           <input type="password" class="form-control" name="password" placeholder="*******">
+
+       </div>
+
+       <input type="submit" value="submit">
+
+</form>
+
+</div>
+
+</body>
+</html>

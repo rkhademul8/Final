@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>This is the view page</h1>
+
+
+    <table border="2">
+
+        <tr>
+
+            <th>Room Type</th>
+            <th>Service</th>
+            <th>Image</th>
+            <th>Description</th>
+            <th>Price</th>
+
+        </tr>
+
+        {% for d in data %}
+        <tr>
+            <td>{{d.type}}</td>
+            <td>{{d.service}}</td>
+            <td> <img src="{{d.images.url}}"> </td>
+            <td>{{d.description}}</td>
+            <td>{{d.price}}</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</body>
+</html>
