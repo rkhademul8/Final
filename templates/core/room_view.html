@@ -17,17 +17,27 @@
             <th>Image</th>
             <th>Description</th>
             <th>Price</th>
+            <th>Booking</th>
 
         </tr>
 
+
+
         {% for d in data %}
+        {% if d.booking %}
+
         <tr>
             <td>{{d.type}}</td>
             <td>{{d.service}}</td>
             <td> <img src="{{d.images.url}}"> </td>
             <td>{{d.description}}</td>
             <td>{{d.price}}</td>
+            <td>{{d.booking}}</td>
         </tr>
+
+        {% else  %}
+        <h1>Already Book</h1>
+        {% endif %}
         {% endfor %}
 
     </table>

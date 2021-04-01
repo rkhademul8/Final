@@ -97,16 +97,27 @@
                     <p>We all live in an age that belongs to the young at heart. Life that is becoming extremely fast, </p>
                 </div>
                 <div class="row mb_30">
+
+
+                    {% for d in data %}
+
+
                     <div class="col-lg-3 col-sm-6">
                         <div class="accomodation_item text-center">
                             <div class="hotel_img">
-                                <img src="{% static 'image/room1.jpg' %}" alt="">
-                                <a href="#" class="btn theme_btn button_hover">Book Now</a>
+                                <img src="{{d.images.url}}" alt="">
+                                <a href="booking" class="btn theme_btn button_hover">Book Now</a>
                             </div>
-                            <a href="#"><h4 class="sec_h4">Double Deluxe Room</h4></a>
-                            <h5>$250<small>/night</small></h5>
+                            <a href="#"><h4 class="sec_h4">{{d.type}}</h4></a>
+                            <h5>{{d.price}} tk<small>/night</small></h5>
                         </div>
                     </div>
+
+                    {% endfor %}
+
+
+<!--
+
                     <div class="col-lg-3 col-sm-6">
                         <div class="accomodation_item text-center">
                             <div class="hotel_img">
@@ -140,7 +151,13 @@
                 </div>
             </div>
         </section>
+        -->
+       
         <!--================ Accomodation Area  =================-->
+
+
+
+
         
         <!--================ Facilities Area  =================-->
 

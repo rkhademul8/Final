@@ -11,8 +11,10 @@ from core.models import Staff,Hotel,Payment,Booking,Room
 
 class home(View):
     def get(self, request):
-        qs=Staff.objects.all()
-        return render(request,'core/index.html',{"data":qs})
+        q=Room.objects.all()
+
+        return render(request,'core/index.html',{"data":q})
+
 
 
 

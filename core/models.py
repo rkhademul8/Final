@@ -38,6 +38,7 @@ class Room(models.Model):
     images=models.ImageField(null=True)
     description=models.TextField(max_length=100,null=True)
     price=models.IntegerField(null=True)
+    booking=models.BooleanField(default=True)
 
 class Booking(models.Model):
     # booking_id=models.
