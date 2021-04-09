@@ -37,6 +37,7 @@ urlpatterns = [
     path('payment/', views.payment.as_view(), name='display'),
     path('room_view/', views.room_view.as_view(), name='room_view'),
     path('room_details/', views.room_details.as_view(), name='room_details'),
+    path('cart/', views.cart.as_view(), name='cart'),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

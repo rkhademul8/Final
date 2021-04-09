@@ -157,3 +157,7 @@ class room_details(View):
         return render(request, 'core/room_details.html',{"data":q})
 
 
+class cart(View):
+    def get(self,request):
+
+       return render(request, 'core/cart.html')
