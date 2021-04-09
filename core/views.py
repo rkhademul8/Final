@@ -117,12 +117,12 @@ class booking(View):
         booking_date=request.POST["book_date"]
         check_in=request.POST["check_in_date"]
         check_out = request.POST["check_out_date"]
-        amount=request.POST["amount"]
-        payments=request.POST["payments"]
-        update=request.POST["update"]
+        adults = request.POST["adults"]
+        childrens = request.POST["childs"]
 
-        # print(booking_date,check_in,check_out,amount,payments,update)
-        data=Booking(booking_date=booking_date,check_in=check_in,check_out=check_out, amount=amount,payment_status=payments,updated_by=update)
+        print(booking_date,check_in,check_out,adults,childrens)
+
+        data=Booking(booking_date=booking_date,check_in=check_in,check_out=check_out, adults=adults,childrens=childrens,)
 
         data.save()
         return render(request,'core/booking.html')
@@ -149,3 +149,11 @@ class room_view(View):
     def get(self,request):
         q=Room.objects.all()
         return render(request, 'core/room_view.html',{"data":q})
+
+
+class room_details(View):
+    def get(self,request):
+        q = Room.objects.all()
+        return render(request, 'core/room_details.html',{"data":q})
+
+

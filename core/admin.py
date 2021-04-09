@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from .models import Staff,Hotel,Room,Booking,Payment
+from .models import Staff,Hotel,Room,Booking,Payment,District,Thana,Division
 
 # admin.site.register(Staff)
 # admin.site.register(Hotel)
@@ -24,8 +24,23 @@ class RoomAdmin(admin.ModelAdmin):
 
 @admin.register(Booking)
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ('booking_date','check_in','check_out','amount','status','payment_status','updated_by')
+    list_display = ('booking_date','check_in','check_out','adults','childrens')
 
 @admin.register(Payment)
 class PaymentAdmin(admin.ModelAdmin):
     list_display = ('amount','credit_no','date')
+
+
+
+@admin.register(Division)
+class DivisionAdmin(admin.ModelAdmin):
+    list_display = ('division',)
+
+@admin.register(District)
+class DistrictAdmin(admin.ModelAdmin):
+    list_display = ('district',)
+
+@admin.register(Thana)
+class ThanaAdmin(admin.ModelAdmin):
+    list_display = ('thana',)
+

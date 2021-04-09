@@ -16,18 +16,36 @@ class Staff(models.Model):
     join_date=models.DateTimeField(auto_now=False, auto_now_add=False)
 
 
+class Division(models.Model):
+    division = models.CharField(max_length=50, null=True)
+
+    def __str__(self):
+        return self.division
+
+class District(models.Model):
+    district=models.CharField(max_length=50,null=True)
+
+    def __str__(self):
+        return self.district
+
+
+
+
+class Thana(models.Model):
+
+    division=models.ForeignKey(Division, blank = True, null = True, on_delete=models.CASCADE)
+    district=models.ForeignKey(District, blank = True, null = True, on_delete=models.CASCADE)
+    thana = models.CharField(max_length=50, null=True)
+
+    def __str__(self):
+        return self.thana
 
 class Hotel(models.Model):
-    # hoyel_id=models
     name=models.CharField(max_length=20,null=True)
-    location=models.CharField(max_length=20,null=True)
+    location = models.ForeignKey(Thana, blank=True, null=True, on_delete=models.CASCADE)
     email=models.EmailField(max_length=50,null=True)
     phone=models.IntegerField(null=True)
     images = models.ImageField(null=True)
-
-
-    def __str__(self):
-        return f'{self.name}   {self.location}   {self.email}'
 
 
 class Room(models.Model):
@@ -46,10 +64,8 @@ class Booking(models.Model):
     booking_date=models.DateTimeField(auto_now=False, auto_now_add=False)
     check_in=models.DateTimeField(auto_now=False, auto_now_add=False)
     check_out=models.DateTimeField(auto_now=False, auto_now_add=False)
-    amount=models.IntegerField(null=True)
-    status=models.CharField(max_length=255,null=True)  # approve,cancel,pending
-    payment_status=models.CharField(max_length=250,null=True)
-    updated_by=models.IntegerField(null=True)
+    adults=models.IntegerField(null=True)
+    childrens=models.IntegerField(null=True)
 
 
 class Payment(models.Model):

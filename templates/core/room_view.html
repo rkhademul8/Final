@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="/static/boot/css/bootstrap.min.css">
+
+    <style>
+        .container{
+        text-alignment:center
+
+        }
+
+    </style>
+
 </head>
+
+
+
 <body>
-<h1>This is the view page</h1>
+
+<div class="container">
+
+<h1>Room View Page</h1>
 
 
     <table border="2">
@@ -29,7 +45,7 @@
         <tr>
             <td>{{d.type}}</td>
             <td>{{d.service}}</td>
-            <td> <img src="{{d.images.url}}"> </td>
+            <td> <img src="{{d.images.url}}" width="200px" height="200px"> </td>
             <td>{{d.description}}</td>
             <td>{{d.price}}</td>
             <td>{{d.booking}}</td>
@@ -41,5 +57,6 @@
         {% endfor %}
 
     </table>
+</div>
 </body>
 </html>
