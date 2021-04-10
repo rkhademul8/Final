@@ -2,6 +2,7 @@ from django.contrib import admin
 
 # Register your models here.
 from .models import Staff,Hotel,Room,Booking,Payment,District,Thana,Division
+from django.contrib.auth.models import User
 
 # admin.site.register(Staff)
 # admin.site.register(Hotel)
@@ -9,9 +10,9 @@ from .models import Staff,Hotel,Room,Booking,Payment,District,Thana,Division
 # admin.site.register(Booking)
 # admin.site.register(Payment)
 
-@admin.register(Staff)
-class StaffAdmin(admin.ModelAdmin):
-    list_display = ('f_name','l_name','email','password','phone','address','images','gender','join_date')
+# @admin.register(User)
+# class UserAdmin(admin.ModelAdmin):
+#     list_display = ('username', 'email', 'first_name', 'last_name')
 
 
 @admin.register(Hotel)

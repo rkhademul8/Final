@@ -75,3 +75,5 @@ class Payment(models.Model):
     amount=models.IntegerField(null=True)
     credit_no=models.IntegerField(null=True)
     date=models.DateTimeField(auto_now_add=False)
+
+

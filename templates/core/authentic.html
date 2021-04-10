@@ -1,0 +1,117 @@
+
+
+  <!-- signup Modal -->
+    <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signupModalLabel">Sign up</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/signup/" method="post">
+
+
+                        <div class="mb-3">
+                            <label for="fname" class="form-label">Type</label>
+
+
+                                 <select id="childs" name="group">
+                                    <option >Secect</option>
+                                    <option value="hotel owner">Hotel owner</option>
+                                    <option value="customer">Customer</option>
+
+
+                                </select>
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fname" class="form-label">First Name</label>
+                            <input type="text" class="form-control" id="fname" name="fname" aria-describedby="fnameHelp"
+                                required>
+                        </div>
+
+
+
+                        <div class="mb-3">
+                            <label for="lname" class="form-label">Last Name</label>
+                            <input type="text" class="form-control" name="lname" id="lname"
+                                aria-describedby="lnameHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" name="username" id="username"
+                                aria-describedby="usernameHelp" placeholder="Enter lowercase and alphanumeric only"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email1" class="form-label">Email address</label>
+                            <input type="email" class="form-control" name="email" id="email1"
+                                aria-describedby="emailHelp" placeholder="name@example.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Password1" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password1" id="Password1"
+                                placeholder="Enter password" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="Password2" class="form-label">Retype Password</label>
+                            <input type="password" class="form-control" name="password2" id="Password2"
+                                placeholder="Enter password again" required>
+                        </div>
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="/login/" method="POST">
+
+                        <div class="mb-3">
+                            <label for="loginusername" class="form-label">Username</label>
+                            <input type="text" class="form-control" name="loginusername" id="loginusername"
+                                aria-describedby="usernameHelp" placeholder="Enter lowercase and alphanumeric only">
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginpassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" name="loginpassword" id="loginpassword"
+                                placeholder="Enter password">
+                        </div>
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main>
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} mb-0 alert-dismissible fade show" role="alert">
+            <strong>Alert!</strong> {{message}}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+
+        {% block main %}
+        {% endblock main %}
+
+          </main>

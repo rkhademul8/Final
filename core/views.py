@@ -1,5 +1,8 @@
-
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.shortcuts import render
+from django.contrib.auth.models import Group
 
 # Create your views here.
 from django.views import View
@@ -161,3 +164,80 @@ class cart(View):
     def get(self,request):
 
        return render(request, 'core/cart.html')
+
+
+
+class authentic(View):
+    def get(self,request):
+
+       return render(request, 'core/authentic.html')
+
+
+class handleSignup(View):
+
+    def post(self,request):
+
+        #  collect User information
+        groups=request.POST['group']
+        fname = request.POST['fname']
+        lname = request.POST['lname']
+        username = request.POST['username']
+        email = request.POST['email']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+
+        # form validation
+        if password1 != password2:
+            # messages.error(request, "Password didn't match! please try again.")
+            return redirect(request.META['HTTP_REFERER'])
+        if not username.isalnum():
+            # messages.error(request,
+            #                "Username should only contain lowercase letters and numbers without any special charecter.")
+            return redirect(request.META['HTTP_REFERER'])
+
+            # create user
+        myuser = User.objects.create_user(username, email, password1)
+
+        myuser.first_name = fname
+        myuser.last_name = lname
+        myuser.type=type
+
+        myuser.save()
+        group = Group.objects.get(name=groups)
+        myuser.groups.add(group)
+        # messages.success(request, "Your account has been successfully created")
+        return redirect(request.META['HTTP_REFERER'])
+
+
+
+class handleLogin(View):
+    def post(self,request):
+
+
+        #  collect User information
+        loginusername = request.POST['loginusername']
+        loginpassword = request.POST['loginpassword']
+
+        # validating user information
+        user = authenticate(username=loginusername, password=loginpassword)
+
+        # saving user information
+        if user is not None:
+            login(request, user)
+            # messages.success(request, "You have successfully logged in")
+            return redirect(request.META['HTTP_REFERER'])
+        else:
+            # messages.error(request, "Username or Password is not matched. Please try again !")
+            return redirect(request.META['HTTP_REFERER'])
+
+
+
+
+    
+    # def handleLogout(request):
+    #     try:
+    #         logout(request)
+    #         messages.success(request, "Successfully log out!")
+    #         return redirect(request.META['HTTP_REFERER'])
+    #     except:
+    #         return render(request, 'home/home.html')
