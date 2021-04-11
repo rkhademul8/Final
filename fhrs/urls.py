@@ -38,9 +38,11 @@ urlpatterns = [
     path('room_view/', views.room_view.as_view(), name='room_view'),
     path('room_details/', views.room_details.as_view(), name='room_details'),
     path('cart/', views.cart.as_view(), name='cart'),
-    path('authentic/', views.authentic.as_view(), name='authentic'),
-    path('signup/', views.handleSignup.as_view(), name='handleSignup'),
-    path('login/', views.handleLogin.as_view(), name='handleSignup'),
+    # path('authentic/', views.authentic.as_view(), name='authentic'),
+    # path('signup/', views.handleSignup.as_view(), name='handleSignup'),
+    # path('login/', views.handleLogin.as_view(), name='handleSignup'),
+    path('signup/', views.Signup.as_view(), name='signup'),
+    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
 
 
 

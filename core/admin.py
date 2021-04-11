@@ -1,4 +1,5 @@
 from django.contrib import admin
+from .models import CustomUser
 
 # Register your models here.
 from .models import Staff,Hotel,Room,Booking,Payment,District,Thana,Division
@@ -13,6 +14,12 @@ from django.contrib.auth.models import User
 # @admin.register(User)
 # class UserAdmin(admin.ModelAdmin):
 #     list_display = ('username', 'email', 'first_name', 'last_name')
+
+
+@admin.register(CustomUser)
+class CustomUserAdmin(admin.ModelAdmin):
+    list_display=('first_name','last_name','email','phone','address','city',)
+
 
 
 @admin.register(Hotel)

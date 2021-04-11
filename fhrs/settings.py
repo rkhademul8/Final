@@ -82,7 +82,7 @@ DATABASES = {
 
     'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'hello',
+            'NAME': 'fhrs',
             'USER': 'root',
             'PASSWORD': 'khademul998877',
             'HOST': '127.0.0.1',
@@ -137,3 +137,16 @@ STATIC_ROOT=os.path.join(BASE_DIR,'assets')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
+
+
+
+AUTH_USER_MODEL='core.CustomUser'
+
+# Gmail Mail Configuration
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'rkhademul8@gmail.com'
+EMAIL_HOST_PASSWORD = 'ycmtglsafrvzlhsu'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'noreply@shop.com'
