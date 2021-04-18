@@ -1,23 +1,28 @@
 
-from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
-from django.contrib.auth.models import PermissionsMixin
+# from django.contrib.auth.base_user import BaseUserManager, AbstractBaseUser
+from django.contrib.auth.models import PermissionsMixin,BaseUserManager, AbstractBaseUser
 from django.db import models
 
 # Create your models here.
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None):
+        """
+                Creates and saves a User with the given email and password.
+                """
         if not email:
             raise ValueError('Users must have an email address')
 
-        user = self.model(email=self.normalize_email(email),)
+        user = self.model(email=self.normalize_email(email),is_active=True)
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
     def create_superuser(self, email, password):
-
+        """
+                Creates and saves a superuser with the given email and password.
+                """
         user = self.create_user(
             email,
             password=password,
@@ -40,9 +45,9 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
-    session_token = models.CharField(max_length=10, default=0)
+    # session_token = models.CharField(max_length=10, default=0)
 
-    active = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
     # a admin user; non super-user
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)  # a superuser
@@ -55,7 +60,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    profile_image = models.FileField(upload_to='media/static/images')
     objects = UserManager()
 
 
@@ -111,15 +116,7 @@ class Hotel(models.Model):
     images = models.ImageField(null=True)
 
 
-class Room(models.Model):
-    # room_id=models
-    # hotel_id=models.IntegerField() F key
-    type=models.CharField(max_length=20,null=True)
-    service=models.CharField(max_length=20,null=True)
-    images=models.ImageField(null=True)
-    description=models.TextField(max_length=100,null=True)
-    price=models.IntegerField(null=True)
-    booking=models.BooleanField(default=True)
+
 
 class Booking(models.Model):
     # booking_id=models.
@@ -139,4 +136,17 @@ class Payment(models.Model):
     credit_no=models.IntegerField(null=True)
     date=models.DateTimeField(auto_now_add=False)
 
+class Room(models.Model):
+    # room_id=models
+    # hotel_id=models.IntegerField() F key
+    type=models.CharField(max_length=20,null=True)
+    service=models.CharField(max_length=20,null=True)
+    images=models.ImageField(null=True)
+    description=models.TextField(max_length=100,null=True)
+    price=models.IntegerField(null=True)
+    booking=models.BooleanField(default=True)
 
+class Cart(models.Model):
+    id=models.AutoField(primary_key=True)
+    room=models.ForeignKey(Room,blank=True, null=True,on_delete=models.CASCADE)
+    customuser=models.ForeignKey(CustomUser,blank=True, null=True,on_delete=models.CASCADE)

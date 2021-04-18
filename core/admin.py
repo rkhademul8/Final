@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import CustomUser
 
 # Register your models here.
-from .models import Staff,Hotel,Room,Booking,Payment,District,Thana,Division
+from .models import Staff,Hotel,Room,Booking,Payment,District,Thana,Division,Cart
 from django.contrib.auth.models import User
 
 # admin.site.register(Staff)
@@ -18,7 +18,7 @@ from django.contrib.auth.models import User
 
 @admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display=('first_name','last_name','email','phone','address','city',)
+    list_display=('first_name','last_name','email','phone','address','city','profile_image')
 
 
 
@@ -52,3 +52,7 @@ class DistrictAdmin(admin.ModelAdmin):
 class ThanaAdmin(admin.ModelAdmin):
     list_display = ('thana',)
 
+
+@admin.register(Cart)
+class CartAdmin(admin.ModelAdmin):
+    list_display = ('id','room','customuser')

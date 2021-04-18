@@ -19,10 +19,18 @@ from django.contrib import admin
 from django.urls import path
 from core import views
 from django.urls import  include,path
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('login/', auth_views.LoginView.as_view(template_name='core/login.html', redirect_authenticated_user=True), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('password_reset/', auth_views.PasswordResetView.as_view(template_name="core/password_reset.html"), name='password_reset'),
+    path('reset_password_sent/', auth_views.PasswordResetDoneView.as_view(template_name="core/password_reset_sent.html"), name ='password_reset_done'),
+    path('reset/<uidb64>/<token>', auth_views.PasswordResetConfirmView.as_view(template_name="core/password_reset_form.html"), name ='password_reset_confirm'),
+    path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(template_name="core/password_reset_done.html"), name ='password_reset_complete'),
+    # path('', include('django.contrib.auth.urls')),
     path('', views.home.as_view(), name='home'),
     path('about', views.about.as_view(), name='about'),
     path('contact', views.contact.as_view(), name='contact'),
@@ -41,8 +49,10 @@ urlpatterns = [
     # path('authentic/', views.authentic.as_view(), name='authentic'),
     # path('signup/', views.handleSignup.as_view(), name='handleSignup'),
     # path('login/', views.handleLogin.as_view(), name='handleSignup'),
+    path('activate/<uidb>/<token>/', views.ActivateURL.as_view(), name='activate'),
     path('signup/', views.Signup.as_view(), name='signup'),
-    path('activate/<uidb64>/<token>/', views.activate, name='activate'),
+    path('user/', views.Mul_user.as_view(), name='user'),
+
 
 
 

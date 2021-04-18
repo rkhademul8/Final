@@ -63,6 +63,37 @@
 <!--                            {% else %}-->
 <!--                            <li class="nav-item"><a class="nav-link" href="contact">Login/Sigup</a></li>-->
 <!--                               {% endif %}-->
+
+
+
+                            {% if not user.is_authenticated %}
+                {% url 'login' as url %}
+                <li class="nav-item {% if request.path == url %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'login' %}">Login</a>
+                </li>
+
+                {% url 'signup' as url %}
+                <li class="nav-item {% if request.path == url %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'user' %}">Sign Up </a>
+                </li>
+                {% endif %}
+            </ul>
+
+            {% if user.is_authenticated %}
+                <ul class="navbar-nav col-auto">
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Welcome, {{user.email}}</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                  </li>
+                </ul>
+            {% endif %}
+
+
+
+
+
                         </ul>
                     </div>
                 </nav>

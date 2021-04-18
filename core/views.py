@@ -1,10 +1,11 @@
-
+import json
 from django.shortcuts import render
 from django.views import View
-from django.http import HttpResponse
-from core.models import Staff,Hotel,Payment,Booking,Room
+from django.http import HttpResponse,  JsonResponse
+from core.models import Staff,Hotel,Payment,Booking,Room,Cart
 
-
+from django.views import generic
+from django.core.serializers import serialize
 from core.forms import SignUpForm
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, User
@@ -18,6 +19,9 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 
 
+UserModel = get_user_model()
+from .forms import SignUpForm
+
 # Create your views here.
 
 
@@ -26,13 +30,13 @@ class Signup(View):
         return render(request, 'core/signup.html')
 
     def post(self, request):
-        form = SignUpForm(request.POST)
+        form = SignUpForm(request.POST, request.FILES)
 
         customer_group, created = Group.objects.get_or_create(name='Customer')
         # print(SignUpForm)
         # print(form.fields)
         # print(form.errors.as_json())
-        print(form.errors.as_data())
+        # print(form.errors.as_data())
         if form.is_valid():
             user = form.save(commit=False)
             user.is_active = False
@@ -60,18 +64,23 @@ class Signup(View):
 
 
 
-def activate(request, uidb64, token):
-    try:
-        uid = urlsafe_base64_decode(uidb64).decode()
-        user = get_user_model()._default_manager.get(pk=uid)
-    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
-        user = None
-    if user is not None and default_token_generator.check_token(user, token):
-        user.active = True
-        user.save()
-        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
-    else:
-        return HttpResponse('Activation link is invalid!')
+class ActivateURL(View):
+    def get(self, request, uidb, token):
+        try:
+            uid = urlsafe_base64_decode(uidb).decode()
+            user = get_user_model()._default_manager.get(pk=uid)
+        except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+            user = None
+        if user is not None and default_token_generator.check_token(user, token):
+            user.is_active = True
+            user.save()
+            return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+        else:
+            return HttpResponse('Activation link is invalid!')
+
+
+
+
 
 
 
@@ -234,82 +243,12 @@ class room_details(View):
 
 class cart(View):
     def get(self,request):
+        q=Cart.objects.all()
 
-       return render(request, 'core/cart.html')
+        return render(request, 'core/cart.html',{"data":q})
+
+class Mul_user(View):
+    def get(self,request):
+        return  render(request,'core/user.html')
 
 
-
-# class authentic(View):
-#     def get(self,request):
-#
-#        return render(request, 'core/authentic.html')
-#
-#
-# class handleSignup(View):
-#
-#     def post(self,request):
-#
-#         #  collect User information
-#         groups=request.POST['group']
-#         fname = request.POST['fname']
-#         lname = request.POST['lname']
-#         username = request.POST['username']
-#         email = request.POST['email']
-#         password1 = request.POST['password1']
-#         password2 = request.POST['password2']
-#
-#         # form validation
-#         if password1 != password2:
-#             # messages.error(request, "Password didn't match! please try again.")
-#             return redirect(request.META['HTTP_REFERER'])
-#         if not username.isalnum():
-#             # messages.error(request,
-#             #                "Username should only contain lowercase letters and numbers without any special charecter.")
-#             return redirect(request.META['HTTP_REFERER'])
-#
-#             # create user
-#         myuser = User.objects.create_user(username, email, password1)
-#
-#         myuser.first_name = fname
-#         myuser.last_name = lname
-#         myuser.type=type
-#
-#         myuser.save()
-#         group = Group.objects.get(name=groups)
-#         myuser.groups.add(group)
-#         # messages.success(request, "Your account has been successfully created")
-#         return redirect(request.META['HTTP_REFERER'])
-#
-#
-#
-# class handleLogin(View):
-#     def post(self,request):
-#
-#
-#         #  collect User information
-#         loginusername = request.POST['loginusername']
-#         loginpassword = request.POST['loginpassword']
-#
-#         # validating user information
-#         user = authenticate(username=loginusername, password=loginpassword)
-#
-#         # saving user information
-#         if user is not None:
-#             login(request, user)
-#             # messages.success(request, "You have successfully logged in")
-#             return redirect(request.META['HTTP_REFERER'])
-#         else:
-#             # messages.error(request, "Username or Password is not matched. Please try again !")
-#             return redirect(request.META['HTTP_REFERER'])
-#
-#
-#
-#
-#
-#     # def handleLogout(request):
-#     #     try:
-#     #         logout(request)
-#     #         messages.success(request, "Successfully log out!")
-#     #         return redirect(request.META['HTTP_REFERER'])
-#     #     except:
-#     #         return render(request, 'home/home.html')
